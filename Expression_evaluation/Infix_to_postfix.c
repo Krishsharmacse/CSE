@@ -11,15 +11,15 @@ char* postFixGenerator(char exp[]);
 
 
 
-// int main(){
-//     char exp[] = "7 + (9-5) * 2";
+int main(){
+    char exp[] = "A+B/C*D";
 
-//     char *res = postFixGenerator(exp);
+    char *res = postFixGenerator(exp);
 
-//     printf("%s", res);
+    printf("%s", res);
 
-//     return 0;
-// }
+    return 0;
+}
 
 
 
@@ -44,7 +44,7 @@ int length(char exp[]){
 
 
 char* postFixGenerator(char exp[]){  
-    char *PF = (char *)malloc((length(exp))*sizeof(char));
+    char *PF = (char *)malloc((length(exp)+2)*sizeof(char));
     if(PF == NULL){
         printf("memory allocation failed");
         return NULL;
@@ -126,9 +126,6 @@ char pop(){
     free(temp);
     return val;
 }
-
-
-
 
 
 
