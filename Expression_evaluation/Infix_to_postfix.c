@@ -11,15 +11,15 @@ char* postFixGenerator(char exp[]);
 
 
 
-int main(){
-    char exp[] = "A+B/C*D";
+// int main(){
+//     char exp[] = "32+15*5";
 
-    char *res = postFixGenerator(exp);
+//     char *res = postFixGenerator(exp);
 
-    printf("%s", res);
+//     printf("%s ------> %c", res, res[0]);
 
-    return 0;
-}
+//     return 0;
+// }
 
 
 
@@ -44,7 +44,8 @@ int length(char exp[]){
 
 
 char* postFixGenerator(char exp[]){  
-    char *PF = (char *)malloc((length(exp)+2)*sizeof(char));
+    int len = length(exp);
+    char *PF = (char *)malloc((len*2)*sizeof(char));
     if(PF == NULL){
         printf("memory allocation failed");
         return NULL;
@@ -53,10 +54,11 @@ char* postFixGenerator(char exp[]){
     int i = 0, j =0;
     char x;
     node *temp_ = head;
-    while(exp[i] != '\0'){
-        switch (exp[i]){
+    while(i < len){
+        char symbol = exp[i];
+        switch (symbol){
             case '(': 
-                push(exp[i]); 
+                push(symbol); 
                 break;
             case ')':
                 x= pop();
@@ -73,18 +75,21 @@ char* postFixGenerator(char exp[]){
             case '/': 
             case '^':
                 x = pop();
-                while(head != NULL && precedence(x) >= precedence(exp[i])){
+                while(head != NULL && precedence(x) >= precedence(symbol)){
                     PF[j++] = x;
                     x = pop();
                 }
                 push(x);
-                push(exp[i]);
+                push(symbol);
                 break;
             
             default:
-                if(exp[i] != ' '){
-                    PF[j++] = exp[i];
+                while(symbol >= '0' && symbol <= '9'){
+                    PF[j++] = symbol;
+                    symbol = exp[++i];
                 }
+                PF[j++] = ' ';
+                i--;
                 break;
         }
         i++;
@@ -95,9 +100,7 @@ char* postFixGenerator(char exp[]){
     }
   
     PF[j] = '\0';
-    return PF;
-
-    
+    return PF;   
 }
 
 

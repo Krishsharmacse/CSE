@@ -11,11 +11,6 @@ int main(){
     
     printf("enter the expression: ");
     fgets(exp, MAX_LENGTH, stdin);
-
-    
-    if (exp[length(exp) - 1] == '\n') {
-        exp[length(exp) - 1] = '\0';
-    }
     
     float result = eval(exp);
 
