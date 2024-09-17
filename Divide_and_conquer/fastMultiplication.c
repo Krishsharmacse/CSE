@@ -1,10 +1,10 @@
 #include<stdio.h>
 
-long int max(long int a, long int b){
+long long int max(long long int a, long long int b){
     return (a>b)? a: b;
 }
 
-long int power(long int base, long int exp){
+long long int power(long long int base, long long int exp){
     if (base == 0) {
         return 0;
     }
@@ -13,15 +13,15 @@ long int power(long int base, long int exp){
         return 1;
     }
 
-    long res = base;
-    for(long i = 1; i <exp; i++){
+    long long res = base;
+    for(long long i = 1; i <exp; i++){
         res *= base;
     }
     return res;
 }
 
-long int length(long int a){ // returns Long int 
-   long int length=0;
+long long int length(long long int a){ // returns Long int 
+   long long int length=0;
     while (a !=0){
        a = a/10;
        length++;
@@ -29,25 +29,33 @@ long int length(long int a){ // returns Long int
     return length;        
 }
 
-long int karatsuba(long int x, long int y){
+long long int karatsuba(long long int x, long long int y){
     if(x<10 || y<10){
         return x*y;
     }
     else{
-        long int n = max(length(x),length(y));
-        long int half = n / 2;
-        long int C = power(10,half);
+        long long int n = max(length(x),length(y));
+        long long int half = n/2;
 
-        long int Xl = x / C;
-        long int Xr = x % C;
+        if(n%2 != 0){
+            half = (n+1)/2;
+            n++;
+        }
 
-        long int Yl = y / C;
-        long int Yr = y % C;
+        long long int C = power(10,half);
 
-        long int XlYl = karatsuba(Xl, Yl);
-        long int XrYr = karatsuba(Xr,Yr);
+        long long int Xl = x / C;
+        long long int Xr = x % C;
 
-        long int XlYr_XrYl = karatsuba(Xl + Xr,Yl+Yr) - XlYl - XrYr;
+        long long int Yl = y / C;
+        long long int Yr = y % C;
+
+        long long int XlYl = karatsuba(Xl, Yl);
+        long long int XrYr = karatsuba(Xr,Yr);
+
+
+        long long int Res = karatsuba(Xl + Xr, Yl + Yr);
+        long long int XlYr_XrYl = Res - XlYl - XrYr;
 
         return ((power(10,n) * XlYl) + (power(10,half) * XlYr_XrYl) + XrYr); 
     }
@@ -55,8 +63,10 @@ long int karatsuba(long int x, long int y){
 
 
 int main(){
-    long int x = 111;
-    long int y = 123;
-    printf("%ld x %ld = %ld",x, y , karatsuba(x,y));
-    return 0;
+    long long int x = 123;
+    long long int y = 123;
+    printf("%lld x %lld = %lld",x, y , karatsuba(x,y));
+
+    printf("\n\n %lld", x*y);
+    return 0; 
 }
