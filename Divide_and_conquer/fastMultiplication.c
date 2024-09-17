@@ -66,7 +66,5 @@ int main(){
     long long int x = 123;
     long long int y = 123;
     printf("%lld x %lld = %lld",x, y , karatsuba(x,y));
-
-    printf("\n\n %lld", x*y);
     return 0; 
 }
