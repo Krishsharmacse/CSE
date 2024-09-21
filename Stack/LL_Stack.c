@@ -11,8 +11,8 @@ typedef struct Node{
 
 static node *head = NULL; 
 
-// int main(){
 
+// int main(){
 //     // push(3);
 //     // push(2);
 //     // push(5);

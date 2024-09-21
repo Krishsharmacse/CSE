@@ -7,19 +7,22 @@ typedef struct node{
 
 }Node;
 
+Node *head = NULL;
 
-void Insert(Node **head, int val){
+
+
+void Insert(int val){
     Node *n = (Node *)malloc(sizeof(Node));
     n->data = val;
     n->next = NULL;
 
     
-    if(*head == NULL){
-        *head = n;
+    if(head == NULL){
+        head = n;
         return;
     }
 
-    Node *temp = *head;
+    Node *temp = head;
     while(temp->next != NULL){
         temp = temp->next;
     }
@@ -29,20 +32,20 @@ void Insert(Node **head, int val){
 }
 
 
-void InsetAt(Node **head, int val, int index){
+void InsetAt(int val, int index){
     Node *newNode = (Node *)malloc(sizeof(Node));
     newNode->data = val;
     newNode->next = NULL;
 
     if (index == 0) {
-        newNode->next = *head;
-        *head = newNode;
+        newNode->next = head;
+        head = newNode;
         return;
     }
 
 
     int i=0;
-    Node *temp = *head;
+    Node *temp = head;
     while(temp->next != NULL && i<index-1){
         temp = temp->next;
         i++;
@@ -65,14 +68,13 @@ void disp(Node *head){
 
 int main(){
 
-    Node *head = NULL;
+   
+    Insert(1);
+    Insert(2);
+    Insert(3);
+    Insert(4);
 
-    Insert(&head,1);
-    Insert(&head,2);
-    Insert(&head,3);
-    Insert(&head,4);
-
-    InsetAt(&head,5,2);
+    InsetAt(5,2);
 
     disp(head);
 
