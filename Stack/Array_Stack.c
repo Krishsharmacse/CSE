@@ -8,16 +8,16 @@ int pop();
 static int stack[length];
 static int top = 0;
 
-// int main(){
-//     push(3);
-//     push(2);
+int main(){
+    push(3);
+    push(2);
 
-//     printf("top = %d, val -> %d\n",top, pop());
-//     printf("top = %d, val -> %d\n",top, pop());
-//     printf("top = %d, val -> %d\n",top, pop());
+    printf("top = %d, val -> %d\n",top, pop());
+    printf("top = %d, val -> %d\n",top, pop());
+    printf("top = %d, val -> %d\n",top, pop());
 
-//     return 0;
-// }
+    return 0;
+}
 
 
 
