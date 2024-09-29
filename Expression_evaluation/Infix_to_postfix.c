@@ -11,15 +11,15 @@ char* postFixGenerator(char exp[]);
 
 
 
-// int main(){
-//     char exp[] = "32+15*5";
+int main(){
+    char exp[] = "32+15*5";
 
-//     char *res = postFixGenerator(exp);
+    char *res = postFixGenerator(exp);
 
-//     printf("%s ------> %c", res, res[0]);
+    printf("%s", res);
 
-//     return 0;
-// }
+    return 0;
+}
 
 
 
@@ -43,7 +43,7 @@ int length(char exp[]){
 }
 
 
-char* postFixGenerator(char exp[]){  
+char* postFixGenerator(char *exp){  
     int len = length(exp);
     char *PF = (char *)malloc((len*2)*sizeof(char));
     if(PF == NULL){
@@ -53,7 +53,6 @@ char* postFixGenerator(char exp[]){
     
     int i = 0, j =0;
     char x;
-    node *temp_ = head;
     while(i < len){
         char symbol = exp[i];
         switch (symbol){
@@ -61,7 +60,7 @@ char* postFixGenerator(char exp[]){
                 push(symbol); 
                 break;
             case ')':
-                x= pop();
+                x = pop();
                 while(x != '('){
                     PF[j++] = x;
                     x = pop();
@@ -75,7 +74,7 @@ char* postFixGenerator(char exp[]){
             case '/': 
             case '^':
                 x = pop();
-                while(head != NULL && precedence(x) >= precedence(symbol)){
+                while(x != '\0' && precedence(x) >= precedence(symbol)){
                     PF[j++] = x;
                     x = pop();
                 }
@@ -95,10 +94,12 @@ char* postFixGenerator(char exp[]){
         i++;
     }
 
-    while(head != NULL){
-        PF[j++] = pop();
+    x = pop();
+    while(x != '\0'){
+        PF[j++] = x;
+        x= pop();
     }
-  
+
     PF[j] = '\0';
     return PF;   
 }
