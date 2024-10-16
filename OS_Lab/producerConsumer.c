@@ -49,26 +49,24 @@ int main() {
         printf("\nEnter your choice: ");
         scanf("%d", &choice);
 
-        switch(choice) {
-            case 1:
-                if (empty != 0) {
-                    producer();
-                } else {
-                    printf("\nBuffer is full \n");
-                }
-                break;
-            case 2:
-                if (full != 0) {
-                    consumer();
-                } else {
-                    printf("\nBuffer is empty \n");
-                }
-                break;
-            case 3:
-                exit(0);
-            default:
-                printf("\nInvalid choice \n");
+        if(choice == 1){
+            if (empty != 0) {
+                producer();
+            } else {
+                printf("\nBuffer is full \n");
+            }
+        }else if(choice == 2){
+            if (full != 0) {
+                consumer();
+            } else {
+                printf("\nBuffer is empty \n");
+            }
+        } else if(choice == 3){
+            exit(0);
+        } else{
+            printf("\nInvalid choice \n");
         }
+
     }
     return 0;
 }

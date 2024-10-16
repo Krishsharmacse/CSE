@@ -16,7 +16,8 @@ int precedence(char x);
 char* IndixToPreFix(char *exp);
 
 int main(){
-    char expression[] = "A+B*(C-D)";
+    // char expression[] = "A+B*(C-D)";
+    char expression[] = "7+5*3/5^1+(3-2)";
     char *prefix = IndixToPreFix(expression);
     printf("%s", prefix);
    
@@ -88,7 +89,7 @@ char* IndixToPreFix(char *exp){
             case '/':
             case '^':
                 x = pop();
-                while(x != '\0' && precedence(x) >= precedence(sym)){
+                while(x != '\0' && precedence(x) > precedence(sym)){
                     PF[j++] = x;
                     x = pop();
                 }
