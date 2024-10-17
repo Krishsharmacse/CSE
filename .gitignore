@@ -2,3 +2,5 @@
 **/*.exe
 **/*.py
 **/tempCodeRunnerFile.c
+*.py
+*.html

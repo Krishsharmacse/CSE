@@ -1,21 +1,18 @@
 Alphabets=[]
 for i in range(65, 123):
-      if(i >= 91 and i <= 96):
-            continue
-      Alphabets.append(chr(i))
+    if(i >= 91 and i <= 96):
+        continue
+    Alphabets.append(chr(i))
 
 def cypher(original_text, shift, encode_decode):
-        output_text=""
-
-        if encode_decode == "DECODE":
-                shift *= -1
-
-        for letter in original_text:
-            shifted_position = Alphabets.index(letter) + shift
-            shifted_position %= len(Alphabets)
-            output_text += Alphabets[shifted_position]
-
-        print(f"Encoded Text : {output_text}")
+    output_text=""
+    if encode_decode == "DECODE":
+            shift *= -1
+    for letter in original_text:
+        shifted_position = Alphabets.index(letter) + shift
+        shifted_position %= len(Alphabets)
+        output_text += Alphabets[shifted_position]
+    print(f"Encoded Text : {output_text}")
 
 
 
