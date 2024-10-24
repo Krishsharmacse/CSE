@@ -134,7 +134,7 @@ void  BST_deletion(int val){
 
         }
         free(temp); 
-        return;  
+        return; 
     }
     
     treeNode *child;
