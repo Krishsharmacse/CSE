@@ -2,7 +2,7 @@
 #include<stdbool.h>
 
 char stack[100];
-int top = false;
+int top = 0;
 
 void push(char x){
     if(top > 100){
@@ -12,7 +12,7 @@ void push(char x){
 }
 
 char pop(){
-    if(top <= false){
+    if(top <= 0){
         return '\0';
     }
 
@@ -20,8 +20,8 @@ char pop(){
 }
 
 int isValid(char* s) {
-    int i = false;
-    int balance = false;
+    int i = 0;
+    top = 0;
     
     while(s[i] != '\0'){
         char sym = s[i++];
@@ -32,69 +32,31 @@ int isValid(char* s) {
                 push(sym);
                 break;
             case ')':
-                if(pop() == '('){
-                    balance = true;
+                if(pop() != '('){
+                    return false;
                 }
                 break;
             case '}':
-                if(pop() == '{'){
-                    balance = true;
+                if(pop() != '{'){
+                   return false;
                 }
                 break;
             case ']':
-                if(pop() == '['){
-                    balance = true;
+                if(pop() != '['){
+                    return false;
                 }
                 break;
             default:
-                balance = false;
+                return false;
 
         }
     }
 
-    return balance;
+    return top == 0;
 }
-
-
-#include <stdbool.h>
-#include <string.h>
-
-// Function to check if the parentheses are valid
-bool isValid(char * s) {
-    // Stack to store the open brackets
-    char stack[10000];  // Assume input size won't exceed 10000 characters
-    int top = -1;       // Initialize stack pointer
-    
-    // Traverse each character in the string
-    for (int i = 0; i < strlen(s); i++) {
-        // If the character is an opening bracket, push it onto the stack
-        if (s[i] == '(' || s[i] == '{' || s[i] == '[') {
-            stack[++top] = s[i];
-        } 
-        // If it's a closing bracket, check for matching
-        else {
-            if (top == -1) {
-                return false;  // Stack is empty but we encountered a closing bracket
-            }
-            if (s[i] == ')' && stack[top] != '(') {
-                return false;  // Parentheses do not match
-            }
-            if (s[i] == '}' && stack[top] != '{') {
-                return false;
-            }
-            if (s[i] == ']' && stack[top] != '[') {
-                return false;
-            }
-            top--;  // Pop the stack if the matching bracket is found
-        }
-    }
-    
-    // If the stack is empty at the end, all brackets matched correctly
-    return top == -1;
-}
-
 
 
 int main(){
-    printf("%d", isValid("{[]}"));
+    isValid("{[]}()[{}]") ? printf("valid parentheses") : printf("Invalid parentheses");
+    return 0;
 }
