@@ -3,6 +3,7 @@
 
 void push(int val);
 int pop();
+int peek();
 
 typedef struct Node{
     int data;
@@ -12,23 +13,20 @@ typedef struct Node{
 static node *head = NULL; 
 
 
-// int main(){
-//     // push(3);
-//     // push(2);
-//     // push(5);
+int main(){
+    push(3);
+    push(2);
+    push(5);
 
-//     printf("%d\n", pop());
-//     printf("%d\n", pop());
-//     printf("%d\n", pop());
+    printf("peek: %d\n", peek());
+    printf("%d\n", pop());
+    printf("%d\n", pop());
+    printf("%d\n", pop());
+    printf("%d\n", pop());
 
-//     // node *temp = head;
-//     // while(temp != NULL){
-//     //     printf("%d\n", temp->data);
-//     //     temp = temp->next;
-//     // }
 
-//     return 0;
-// }
+    return 0;
+}
 
 
 void push(int val){
@@ -47,5 +45,14 @@ int pop(){
     int val = head->data;
     head = head->next;
     free(temp);
+    return val;
+}
+
+int peek(){
+    if(head == NULL){
+        printf("empty stack ");
+        return -1;
+    }
+    int val = head->data;
     return val;
 }

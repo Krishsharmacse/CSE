@@ -4,32 +4,30 @@
 
 int Q[size];
 int front, rear;
-// int count;
 
-void insert(int val);
-int delete();
+void enqueue(int val);
+int Dequeue();
 
 int main(){
     front = rear = 0;
 
-    insert(5);
-    insert(7);
-    insert(4);
-    insert(2);
+    enqueue(5);
+    enqueue(7);
+    enqueue(4);
+    enqueue(2);
 
-    printf("%d\n", delete());    
-    printf("%d\n", delete());    
-    printf("%d\n", delete());    
-    printf("%d\n", delete());    
-    printf("%d\n", delete());    
-    printf("%d\n", delete());    
+    printf("%d\n", Dequeue());    
+    printf("%d\n", Dequeue());    
+    printf("%d\n", Dequeue());    
+    printf("%d\n", Dequeue());    
+    printf("%d\n", Dequeue());    
 
 
     return 0; 
 }
 
 
-void insert(int val){
+void enqueue(int val){
     if((rear + 1) % size == front){
         printf("queue is full");
         return;
@@ -39,7 +37,7 @@ void insert(int val){
     rear = (rear + 1) % size;
 }
 
-int delete(){
+int Dequeue(){
     if(front == rear){
         printf("queue is empty ");
         return -1;

@@ -1,7 +1,25 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+
 #define P 3  // Number of processes
+bool isSafe(int[], int, int[], int[]);
+
+int main() {
+    int processes[P] = {0, 1, 2}; // process Ids
+    int avail = 3;                // currently available resources
+    int max[P] = {10, 4, 9};      // max number of resources a process may require
+    int allot[P] = {5, 2, 2};     // number of resources allocated to the processes
+
+    if (isSafe(processes, avail, max, allot)) {
+        printf("The system is in a safe state.\n");
+    } else {
+        printf("The system is NOT in a safe state.\n");
+    }
+
+    return 0;
+}
+
 
 bool isSafe(int processes[], int avail, int max[], int allot[]) {
     int need[P]; 
@@ -40,17 +58,3 @@ bool isSafe(int processes[], int avail, int max[], int allot[]) {
     return true;  // The system is in a safe state
 }
 
-int main() {
-    int processes[P] = {0, 1, 2};
-    int avail = 3;
-    int max[P] = {10, 4, 9};
-    int allot[P] = {5, 2, 2};
-
-    if (isSafe(processes, avail, max, allot)) {
-        printf("The system is in a safe state.\n");
-    } else {
-        printf("The system is NOT in a safe state.\n");
-    }
-
-    return 0;
-}

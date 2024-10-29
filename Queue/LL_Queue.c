@@ -10,48 +10,46 @@ typedef struct Queue {
 Queue *rear = NULL;
 
 
-void insert(int val);
-int delete();
+void enqueue(int val);
+int dequeue();
 
 
 int main(){
-    insert(5);
-    insert(3);
-    insert(7);
-    insert(10);
+    enqueue(5);
+    enqueue(3);
+    enqueue(7);
+    enqueue(10);
 
-    printf("%d\n", delete());
-    printf("%d\n", delete());
-    printf("%d\n", delete());
-    printf("%d\n", delete());
-    printf("%d\n", delete());
+    printf("%d\n", dequeue());
+    printf("%d\n", dequeue());
+    printf("%d\n", dequeue());
+    printf("%d\n", dequeue());
+    printf("%d\n", dequeue());
     
     return 0;
 }
 
 
-void insert(int val){
+void enqueue(int val){
     Queue *temp = (Queue *)malloc(sizeof(Queue));
 
     if (temp == NULL) {
-        printf(stderr, "Memory allocation failed\n");
+        printf("Memory allocation failed\n");
         return;
     }
 
 
+    temp->data = val;
     if(rear == NULL){
-        temp->data = val;
         temp->next = temp;
-        rear = temp;
     }else{
-        temp->data = val;
         temp->next = rear->next;
         rear->next = temp;
-        rear = temp;
     }
+    rear = temp;
 }
 
-int delete(){
+int dequeue(){
     if (rear == NULL) {
         printf("Queue is empty ");
         return -1;

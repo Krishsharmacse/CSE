@@ -2,8 +2,8 @@
 #include<stdlib.h>
 
 struct sparsePol{
-    int exp;
     int coeff;
+    int exp;
 };
 
 struct sparsePol* multiply(struct sparsePol *PolA, struct sparsePol *PolB, int m, int n,  int *resSize){
@@ -47,28 +47,21 @@ int main(){
     int Index=0;
     struct sparsePol PolA[m], PolB[n];
 
-    PolA[0].exp= 7;
-    PolA[0].coeff=1;
+    PolA[0].exp= 7; PolA[0].coeff=1;
 
-    PolA[1].exp=1;
-    PolA[1].coeff=6;
+    PolA[1].exp=1; PolA[1].coeff=6;
     
-    PolA[2].exp=0;
-    PolA[2].coeff=1;
+    PolA[2].exp=0; PolA[2].coeff=1;
     
 // ------------------------------------
 
-    PolB[0].exp= 7;
-    PolB[0].coeff=1;
+    PolB[0].exp= 7; PolB[0].coeff=1;
 
-    PolB[1].exp=3;
-    PolB[1].coeff=7;
+    PolB[1].exp=3; PolB[1].coeff=7;
 
-    PolB[2].exp=1;
-    PolB[2].coeff=2;
+    PolB[2].exp=1; PolB[2].coeff=2;
 
-    PolB[3].exp=0;
-    PolB[3].coeff=1;
+    PolB[3].exp=0; PolB[3].coeff=1;
 
 
     struct sparsePol *res = multiply(PolA, PolB, m, n, &Index);

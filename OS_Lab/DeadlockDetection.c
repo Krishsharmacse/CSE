@@ -5,16 +5,16 @@ struct Resource;
 
 typedef struct Process {
     int id;
-    struct Resource *requested_resource;
     struct Process *next_process; 
+    struct Resource *requested_resource;
     int visited; 
 } Process;
 
 typedef struct Resource {
     int id;
-    struct Process *allocated_process; 
     struct Resource *next_resource; 
-} Resource;
+    struct Process *allocated_process; 
+} Resource; 
 
 Process *Phead = NULL;
 Resource *Rhead = NULL;
@@ -27,9 +27,13 @@ void Cleanup();
 
 
 int main() {
+    // Allocate(ResourceId, ProcessId);
     Allocate(1, 1);
     Allocate(2, 2);
-    // Request(1, 2);
+
+
+    // Request(ProcessId, ResourceId);
+    Request(1, 2);
     Request(2, 1); 
 
     Cleanup();
@@ -100,6 +104,8 @@ void Allocate(int R, int P) {
     printf("Allocation: Resource R%d --> Process P%d\n", R, P);
 }
 
+
+
 // Function to perform DFS to detect cycles in the resource allocation graph
 int DFS(Process *process) {
     // Perform Depth-First Search to detect cycles
@@ -114,8 +120,8 @@ int DFS(Process *process) {
     process->visited = 1;
 
     if (process->requested_resource != NULL) {
-        Process *allocated_process = process->requested_resource->allocated_process;
-        if (DFS(allocated_process)) {
+        Process *WaitingFor = process->requested_resource->allocated_process;
+        if (DFS(WaitingFor)) {
             return 1; // Cycle detected
         }
     }
