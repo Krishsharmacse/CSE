@@ -12,12 +12,12 @@ matrix * SparseAddition(matrix *A, matrix * B, int m, int n, int *Index);
 int main(){
     int m = 6, n = 6, AddIndex = 0;
     matrix A[m], B[n];
-         //    0  1  2  3
-    // 0 ->  | 0  5  0  0 |
-    // 1 ->  | 2  0  0  0 |
-    // 2 ->  | 0  0  4  0 |
-    // 3 ->  | 0  0  0  3 |
-    // 4 ->  | 0  1  0  0 |
+            0  1  2  3
+    0 ->  | 0  5  0  0 |
+    1 ->  | 2  0  0  0 |
+    2 ->  | 0  0  4  0 |
+    3 ->  | 0  0  0  3 |
+    4 ->  | 0  1  0  0 |
 
     A[0].Row = 5; A[0].Col = 4; A[0].Val = 5;
 
