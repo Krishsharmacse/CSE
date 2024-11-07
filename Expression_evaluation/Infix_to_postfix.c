@@ -1,38 +1,41 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-
-int length(char exp[]);
-void push(char val);
-char pop();
-int precedence(char x);
-char* postFixGenerator(char exp[]);
-
-
-
-
-int main(){
-    char exp[] = "32+15*5";
-
-    char *res = postFixGenerator(exp);
-
-    printf("%s", res);
-
-    return 0;
-}
-
-
-
-
-
-
-
 typedef struct Node{
     char data;
     struct  Node *next;
 } node;
 
 static node *head = NULL; 
+
+int length(char exp[]);
+void push(char val);
+char pop();
+int precedence(char x);
+char* postFixGenerator(char *exp);
+
+
+
+
+// int main(){
+//     char exp[] = "7+5*3/5^1+(3-2)";
+
+//     printf("Infix Expression:   %s\n", exp);
+
+//     char *res = postFixGenerator(exp);
+
+//     printf("Postfix Expression: %s", res);
+
+//     return 0;
+// }
+
+
+
+
+
+
+
+
 
 int length(char exp[]){
     int k = 0;

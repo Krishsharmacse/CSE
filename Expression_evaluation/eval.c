@@ -21,6 +21,19 @@ static float solve(float x, char op, float y);
 
 
 
+int main(){
+    // 7+5*3/5^1+(3-2)
+    char exp[] = "7+5*3/5^1+(3-2)";
+    
+    float result = eval(exp);
+
+    printf("%s = %f\n",exp, result);
+
+    return 0;
+}
+
+
+
 static int power(int base, int exp){
     if (base == 0) return 0;
     if(exp == 0) return 1;
@@ -142,21 +155,3 @@ float eval(char exp[]){
 }
 
 
-// int main(){
-//     // 7 + (9-5) * 2
-//     char exp[] = "12*12";
-    
-//     // printf("enter the expression: ");
-//     // fgets(exp, 100, stdin);
-
-    
-//     // if (exp[length(exp) - 1] == '\n') {
-//     //     exp[length(exp) - 1] = '\0';
-//     // }
-    
-//     float result = eval(exp);
-
-//     printf("%s = %f\n",exp, result);
-
-//     return 0;
-// }

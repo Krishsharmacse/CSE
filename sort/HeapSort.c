@@ -6,9 +6,17 @@ void buildHeap(int Arr[], int n);
 void Heapify(int Arr[], int n, int i);
 
 int main(){
+
     int Arr[] = {5,20,6,8,1,0,3};
     int n = sizeof(Arr) / sizeof(Arr[0]) ;
+
+    printf("unsorted data : ");
+    for(int i = 0; i < n; i++){
+        printf("%d ", Arr[i]);
+    }
     HeapSort(Arr, n);
+
+    printf("\nHeap Sort: ");
     for(int i = 0; i < n; i++){
         printf("%d ", Arr[i]);
     }

@@ -1,5 +1,27 @@
 #include <stdio.h>
 
+
+void swap(int* arr, int i, int j);
+int pivot(int *arr, int pivotIndex, int endIndex);
+void quickSort(int *arr, int left, int right);
+void printArray(int arr[], int size);
+
+
+int main() {
+    int arr[] = {4,6,1,7,3,2,5};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    printf("Unsorted array : ");
+    printArray(arr, n);
+    
+    quickSort(arr, 0, n - 1);
+
+    printf("sorted array :   ");
+    printArray(arr, n);
+    return 0;
+}
+
+
 void swap(int* arr, int i, int j) {
     int temp = arr[i];
     arr[i] = arr[j];
@@ -32,17 +54,4 @@ void printArray(int arr[], int size) {
         printf("%d ", arr[i]);
     }
     printf("\n");
-}
-
-int main() {
-    int arr[] = {4,6,1,7,3,2,5};
-    int n = sizeof(arr) / sizeof(arr[0]);
-    printArray(arr, n);
-    
-    quickSort(arr, 0, n - 1);
-
-    
-    printf("Sorted array: \n");
-    printArray(arr, n);
-    return 0;
 }
