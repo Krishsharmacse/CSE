@@ -1,3 +1,4 @@
+// mergeSort
 #include<stdio.h>
 
 void mergeSort(int arr[], int i, int j);
@@ -46,7 +47,7 @@ void merge(int arr[], int i, int mid, int j){
         y++; 
     }
 
-     for (int k = 0; k < Index; k++) {
+    for (int k = 0; k < Index; k++) {
         arr[i + k] = mergedArray[k];
     }
  

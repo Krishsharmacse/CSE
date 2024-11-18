@@ -1,5 +1,5 @@
+// quickSort
 #include <stdio.h>
-
 
 void swap(int* arr, int i, int j);
 int pivot(int *arr, int pivotIndex, int endIndex);
@@ -8,15 +8,22 @@ void printArray(int arr[], int size);
 
 
 int main() {
-    int arr[] = {4,6,1,7,3,2,5};
+    // int arr[] = {4,6,1,7,3,2,5};
+    int arr[] = {7,19,4,5,9,2};
     int n = sizeof(arr) / sizeof(arr[0]);
 
     printf("Unsorted array : ");
-    printArray(arr, n);
+    // printArray(arr, n);
     
-    quickSort(arr, 0, n - 1);
+    printf("%d\n", n);
 
-    printf("sorted array :   ");
+    // quickSort(arr, 0, n - 1);
+    printf("%d\n", pivot(arr, 0, n));
+
+    printf("size: %d\n", n);
+
+
+    // printf("sorted array :   ");
     printArray(arr, n);
     return 0;
 }
@@ -30,7 +37,8 @@ void swap(int* arr, int i, int j) {
 
 int pivot(int *arr, int pivotIndex, int endIndex){
     int swapIndex = pivotIndex;
-    for(int i = pivotIndex+1; i<= endIndex; i++){
+    for(int i = pivotIndex+1; i < endIndex; i++){
+        int x = arr[i], y = arr[pivotIndex];
         if(arr[i] < arr[pivotIndex]){
             swapIndex++;
             swap(arr, swapIndex, i);
@@ -38,6 +46,7 @@ int pivot(int *arr, int pivotIndex, int endIndex){
     }
 
     swap(arr, pivotIndex, swapIndex);
+    // printArray(arr, endIndex);
     return swapIndex;
 }
 

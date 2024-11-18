@@ -16,9 +16,9 @@ int dequeue();
 
 int main(){
     enqueue(5);
-    enqueue(3);
-    enqueue(7);
-    enqueue(10);
+    // enqueue(3);
+    // enqueue(7);
+    // enqueue(10);
 
     printf("%d\n", dequeue());
     printf("%d\n", dequeue());
@@ -41,7 +41,7 @@ void enqueue(int val){
 
     temp->data = val;
     if(rear == NULL){
-        temp->next = temp;
+        temp->next = temp ;
     }else{
         temp->next = rear->next;
         rear->next = temp;

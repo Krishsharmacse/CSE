@@ -1,3 +1,4 @@
+//BST
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -73,9 +74,7 @@ void BST_insertion(int val) {
         return;
     }
 
-
    treeNode *prev = NULL, *cur = root;
-
     while(cur != NULL){
         prev = cur;
         if(cur->data > val){
@@ -84,17 +83,13 @@ void BST_insertion(int val) {
             cur = cur->rchild;
         }
     }
-
     if(prev->data > val){
         prev->lchild = Node;
     }else{
         prev->rchild = Node;
     }
-
     Node->parent = prev;
 }
-
-
 
 void  BST_deletion(int val){
     if(root == NULL){
@@ -102,12 +97,9 @@ void  BST_deletion(int val){
         return;
     }
 
-
    treeNode *prev = NULL, *cur = root;
-
     while(cur != NULL && cur->data != val){
         prev = cur;
-
         if(cur->data > val){
             cur = cur->lchild;
         }else{
