@@ -111,140 +111,231 @@
 
 
 
-// ------------------- reverse K nodes -----------------
-#include<stdio.h>
-#include<stdlib.h>
+// // ------------------- reverse K nodes -----------------
+// #include<stdio.h>
+// #include<stdlib.h>
 
-typedef struct node{
-    int data;
-    struct node *next;
+// typedef struct node{
+//     int data;
+//     struct node *next;
 
-}Node;
+// }Node;
 
-Node *head = NULL;
-Node *NewHead = NULL;
+// Node *head = NULL;
+// Node *NewHead = NULL;
 
 
 
-void Insert(int val){
-    Node *n = (Node *)malloc(sizeof(Node));
-    n->data = val;
-    n->next = NULL;
+// void Insert(int val){
+//     Node *n = (Node *)malloc(sizeof(Node));
+//     n->data = val;
+//     n->next = NULL;
 
     
-    if(head == NULL){
-        head = n;
-        return;
-    }
+//     if(head == NULL){
+//         head = n;
+//         return;
+//     }
 
-    Node *temp = head;
-    while(temp->next != NULL){
-        temp = temp->next;
-    }
+//     Node *temp = head;
+//     while(temp->next != NULL){
+//         temp = temp->next;
+//     }
 
-    temp->next = n;
+//     temp->next = n;
 
-}
+// }
 
 
-void disp(Node *head){
-    Node *temp = head;
-    while (temp != NULL){
-        printf(" %d -> ", temp->data);
-        temp = temp->next;
-    }  
+// void disp(Node *head){
+//     Node *temp = head;
+//     while (temp != NULL){
+//         printf(" %d -> ", temp->data);
+//         temp = temp->next;
+//     }  
 
-    printf("\n");
-}
+//     printf("\n");
+// }
 
-Node* reverse( Node *previousNodes, Node *start, int k){
-    // if(previousNodes != NULL){
-    //     printf("\n\tprevious Node val %d\n\n", previousNodes->data);
-    // }
+// Node* reverse( Node *previousNodes, Node *start, int k){
+//     // if(previousNodes != NULL){
+//     //     printf("\n\tprevious Node val %d\n\n", previousNodes->data);
+//     // }
 
-    int c = 0;
-    Node* temp = start;
-    while(temp != NULL){
-        c++;
-        temp = temp->next;
-    }
-    if(c < k){
-        // printf("remaining nodes is less than %d", k);
-        return NULL;
-    }
+//     int c = 0;
+//     Node* temp = start;
+//     while(temp != NULL){
+//         c++;
+//         temp = temp->next;
+//     }
+//     if(c < k){
+//         // printf("remaining nodes is less than %d", k);
+//         return NULL;
+//     }
 
-    Node *prev = NULL;
-    Node *cur = start;
-    Node *nex = NULL;
+//     Node *prev = NULL;
+//     Node *cur = start;
+//     Node *nex = NULL;
 
-    // printf("cur -> %d\n", cur->data);
+//     // printf("cur -> %d\n", cur->data);
 
-    while(cur != NULL && k > 0){
-        nex = cur->next;
-        cur->next = prev; 
-        prev = cur;
-        cur = nex;
-        k--; 
-    }
+//     while(cur != NULL && k > 0){
+//         nex = cur->next;
+//         cur->next = prev; 
+//         prev = cur;
+//         cur = nex;
+//         k--; 
+//     }
     
-    // if(cur != NULL && nex != NULL && prev != NULL){
-    //     printf("%d %d %d\n", prev->data, cur->data, nex->data);
-    // }
+//     // if(cur != NULL && nex != NULL && prev != NULL){
+//     //     printf("%d %d %d\n", prev->data, cur->data, nex->data);
+//     // }
 
-    if(previousNodes != NULL){
-        previousNodes->next = prev;
-    }
+//     if(previousNodes != NULL){
+//         previousNodes->next = prev;
+//     }
 
-    // disp(NewHead);
+//     // disp(NewHead);
 
-    while(prev != NULL && prev->next != NULL){
-        prev = prev->next;
-    }
+//     while(prev != NULL && prev->next != NULL){
+//         prev = prev->next;
+//     }
 
-    prev->next = cur;
+//     prev->next = cur;
 
    
 
-    return prev;
+//     return prev;
+// }
+
+// int main(){
+
+   
+//     Insert(1);
+//     Insert(2);
+//     Insert(3);
+//     Insert(4);
+//     Insert(5);
+//     Insert(6);
+//     Insert(7);
+//     Insert(8);
+
+//     disp(head);
+//     Node* start = head, *temp = head;
+//     int i = 1;
+//     int k = 3;
+//     while(temp->next != NULL && i<k){
+//         temp = temp->next;
+//         i++;
+//     }
+
+//     NewHead = temp;
+
+    
+//     Node* previousNodes = NULL;
+
+//     while(start != NULL && start->next != NULL){
+//         previousNodes = reverse(previousNodes, start, k);
+//         start = start->next;
+//     }
+
+//     // printf("%d\n", start->data);
+    
+
+//     disp(NewHead);
+
+
+
+
+// }
+
+
+
+// bit flip count to reach the goal from start
+// int main(){
+//     int start = 10;
+//     int goal = 7;
+//     int c = a ^ b;
+
+//     int count = 0;
+//     for(int i = c; i > 0; i = i>>1){
+//         count += i & 1;
+//     }
+
+//     printf("%d\n",count);
+// }
+
+// #include<stdbool.h>
+// bool isBalanced(char* num) {
+//     int evenSum = 0, oddSum = 0, j = 0;
+//     for(int i = num; i > 0; i /= 10){
+//         if(j % 2 == 0){
+//             evenSum += (i %  10);
+//         }else{
+//             oddSum += (i %  10);
+//         }
+//         j++;
+//     }
+//     return evenSum == oddSum;
+// }
+
+int addDigits(int num) {
+    if(num / 10 == 0){
+        return num;
+    }
+    int sum = 0;
+    while(num > 0){
+        sum += num % 10;
+        num /= 10;
+    }
+    return addDigits(sum);
+}
+
+
+#include<string.h>
+#include<stdlib.h>
+
+
+
+char* RLE(char *s){
+    int length = strlen(s);
+    char *res = (char*)malloc(sizeof(char) * (length*2) + 1);
+    int index = 0;
+    int i = 0;
+    while(i < length){
+        char c = count(s, i);
+        res[index++] = c; 
+        res[index++] = s[i]; 
+        i += (c - '0');
+    }
+    res[index] = '\0';
+    // printf("%s",res);
+    return res;
+}
+
+char *countSay(int n){
+    if(n == 1){
+        return "1";
+    }
+
+    // if(n == 2){
+    //     return RLE("1");
+    // }
+
+    return RLE(countSay(n-1));
 }
 
 int main(){
-
-   
-    Insert(1);
-    Insert(2);
-    Insert(3);
-    Insert(4);
-    Insert(5);
-    Insert(6);
-    Insert(7);
-    Insert(8);
-
-    disp(head);
-    Node* start = head, *temp = head;
-    int i = 1;
-    int k = 3;
-    while(temp->next != NULL && i<k){
-        temp = temp->next;
-        i++;
-    }
-
-    NewHead = temp;
-
+    printf("%s", countSay(4));
+    // RLE("1");
+    // int a = addDigits(38);
     
-    Node* previousNodes = NULL;
-
-    while(start != NULL && start->next != NULL){
-        previousNodes = reverse(previousNodes, start, k);
-        start = start->next;
-    }
-
-    // printf("%d\n", start->data);
-    
-
-    disp(NewHead);
-
-
-
+    // int a = 123;
+    // int count = 0;
+    // while(a > 0){
+    //     count += a % 10;
+    //     a = a / 10;
+    // }
+    // printf("%d", a);
 
 }
