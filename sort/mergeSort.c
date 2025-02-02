@@ -24,7 +24,7 @@ void merge(int arr[], int i, int mid, int j){
     int Index=0;
     int x = i, y = mid+1;
 
-    while(x <=mid && y <= j){
+    while(x <= mid && y <= j){
         if(arr[x] <= arr[y]){
             mergedArray[Index] = arr[x];
             x++;

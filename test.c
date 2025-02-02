@@ -5,14 +5,14 @@
 
 // int longestUniqueSubstring(char *str) {
 //     int n = strlen(str);
-    
+
 //     int lastIndex[MAX_CHAR];
 //     for (int i = 0; i < MAX_CHAR; i++) {
 //         lastIndex[i] = -1;
 //     }
-    
-//     int maxLength = 0; 
-//     int start = 0;     
+
+//     int maxLength = 0;
+//     int start = 0;
 
 //     for (int end = 0; end < n; end++) {
 //         int charAscii = (int)str[end];
@@ -66,7 +66,6 @@
 //     return 0;
 // }
 
-
 // int reverse(int x){
 //     int res = 0;
 //     while(x > 0){
@@ -108,9 +107,6 @@
 //     }
 // }
 
-
-
-
 // // ------------------- reverse K nodes -----------------
 // #include<stdio.h>
 // #include<stdlib.h>
@@ -124,14 +120,11 @@
 // Node *head = NULL;
 // Node *NewHead = NULL;
 
-
-
 // void Insert(int val){
 //     Node *n = (Node *)malloc(sizeof(Node));
 //     n->data = val;
 //     n->next = NULL;
 
-    
 //     if(head == NULL){
 //         head = n;
 //         return;
@@ -146,13 +139,12 @@
 
 // }
 
-
 // void disp(Node *head){
 //     Node *temp = head;
 //     while (temp != NULL){
 //         printf(" %d -> ", temp->data);
 //         temp = temp->next;
-//     }  
+//     }
 
 //     printf("\n");
 // }
@@ -181,12 +173,12 @@
 
 //     while(cur != NULL && k > 0){
 //         nex = cur->next;
-//         cur->next = prev; 
+//         cur->next = prev;
 //         prev = cur;
 //         cur = nex;
-//         k--; 
+//         k--;
 //     }
-    
+
 //     // if(cur != NULL && nex != NULL && prev != NULL){
 //     //     printf("%d %d %d\n", prev->data, cur->data, nex->data);
 //     // }
@@ -203,14 +195,11 @@
 
 //     prev->next = cur;
 
-   
-
 //     return prev;
 // }
 
 // int main(){
 
-   
 //     Insert(1);
 //     Insert(2);
 //     Insert(3);
@@ -231,7 +220,6 @@
 
 //     NewHead = temp;
 
-    
 //     Node* previousNodes = NULL;
 
 //     while(start != NULL && start->next != NULL){
@@ -240,16 +228,10 @@
 //     }
 
 //     // printf("%d\n", start->data);
-    
 
 //     disp(NewHead);
 
-
-
-
 // }
-
-
 
 // bit flip count to reach the goal from start
 // int main(){
@@ -279,63 +261,224 @@
 //     return evenSum == oddSum;
 // }
 
-int addDigits(int num) {
-    if(num / 10 == 0){
-        return num;
+// int addDigits(int num) {
+//     if(num / 10 == 0){
+//         return num;
+//     }
+//     int sum = 0;
+//     while(num > 0){
+//         sum += num % 10;
+//         num /= 10;
+//     }
+//     return addDigits(sum);
+// }
+
+// char* RLE(char *s){
+//     int length = strlen(s);
+//     char *res = (char*)malloc(sizeof(char) * (length*2) + 1);
+//     int index = 0;
+//     int i = 0;
+//     while(i < length){
+//         char c = count(s, i);
+//         res[index++] = c;
+//         res[index++] = s[i];
+//         i += (c - '0');
+//     }
+//     res[index] = '\0';
+//     // printf("%s",res);
+//     return res;
+// }
+
+// char *countSay(int n){
+//     if(n == 1){
+//         return "1";
+//     }
+
+//     // if(n == 2){
+//     //     return RLE("1");
+//     // }
+
+//     return RLE(countSay(n-1));
+// }
+
+// int jump(int* nums, int numsSize) {
+//     int i = 0;
+//     int Index = 0;
+//     int jumps = 0;
+//     while(i < numsSize){
+//         i = i + jumps + nums[Index++];
+//         jumps++;
+//     }
+//     return jumps;
+// }
+
+// int main(){
+//     int nums[] = {2,1,2,1,4};
+//     printf("%d ", jump(nums, 5));
+// printf("%s", countSay(4));
+// RLE("1");
+// int a = addDigits(38);
+
+// int a = 123;
+// int count = 0;
+// while(a > 0){
+//     count += a % 10;
+//     a = a / 10;
+// }
+// printf("%d", a);
+
+// }
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <windows.h>
+
+typedef struct Block
+{
+    int key;
+    struct Block *next;
+} Block;
+
+int *GenArr(int size)
+{
+    int *Arr = (int *)malloc(sizeof(int) * size);
+    for (int i = 0; i < size; i++)
+    {
+        Arr[i] = i;
     }
-    int sum = 0;
-    while(num > 0){
-        sum += num % 10;
-        num /= 10;
-    }
-    return addDigits(sum);
+    return Arr;
 }
 
-
-#include<string.h>
-#include<stdlib.h>
-
-
-
-char* RLE(char *s){
-    int length = strlen(s);
-    char *res = (char*)malloc(sizeof(char) * (length*2) + 1);
-    int index = 0;
-    int i = 0;
-    while(i < length){
-        char c = count(s, i);
-        res[index++] = c; 
-        res[index++] = s[i]; 
-        i += (c - '0');
+int LinearSearch(int target, int *Arr, int size)
+{
+    for (unsigned int i = 0; i < size; i++)
+    {
+        if (Arr[i] == target)
+            return i;
     }
-    res[index] = '\0';
-    // printf("%s",res);
-    return res;
+    return -1;
 }
 
-char *countSay(int n){
-    if(n == 1){
-        return "1";
+int BinarySearch(int *Arr, int target, int start, int end)
+{
+    if (start > end)
+    {
+        return end + 1;
     }
-
-    // if(n == 2){
-    //     return RLE("1");
-    // }
-
-    return RLE(countSay(n-1));
+    int middle = (start + end) / 2;
+    if (Arr[middle] == target)
+    {
+        return middle;
+    }
+    else if (Arr[middle] > target)
+    {
+        return BinarySearch(Arr, target, start, middle - 1);
+    }
+    else
+    {
+        return BinarySearch(Arr, target, middle + 1, end);
+    }
 }
 
-int main(){
-    printf("%s", countSay(4));
-    // RLE("1");
-    // int a = addDigits(38);
-    
-    // int a = 123;
-    // int count = 0;
-    // while(a > 0){
-    //     count += a % 10;
-    //     a = a / 10;
-    // }
-    // printf("%d", a);
+int hashFunction(int key, int SIZE)
+{
+    double fraction = key * 0.6180339887;
+    fraction = fraction - (long long)fraction;
+    return (int)(SIZE * fraction);
+}
 
+Block *createBlock(int key)
+{
+    Block *node = (Block *)malloc(sizeof(Block));
+    node->key = key;
+    node->next = NULL;
+    return node;
+}
+
+void put(Block **hashTable, int key, int SIZE)
+{
+    int index = hashFunction(key, SIZE);
+    Block *node = createBlock(key);
+    node->next = hashTable[index];
+    hashTable[index] = node;
+}
+
+int search(Block **hashTable, int key, int SIZE)
+{
+    int index = hashFunction(key, SIZE);
+    Block *temp = hashTable[index];
+    while (temp != NULL)
+    {
+        if (temp->key == key)
+        {
+            return index;
+        }
+        temp = temp->next;
+    }
+    return -1;
+}
+
+int main()
+{
+    LARGE_INTEGER frequency, start, end;
+    QueryPerformanceFrequency(&frequency);
+    int Sizes[] = {100, 1000, 10000, 100000, 1000000};
+    int n = sizeof(Sizes) / sizeof(Sizes[0]);
+
+    printf("Linear Search:\n");
+    printf("Input size \t time taken\n");
+    for (int i = 0; i < n; i++)
+    {
+        int s = Sizes[i];
+        int *Arr = GenArr(s);
+        int target = s - 1;
+        QueryPerformanceCounter(&start);
+        int index = LinearSearch(target, Arr, s);
+        QueryPerformanceCounter(&end);
+        double time_taken = (double)(end.QuadPart - start.QuadPart) * 1e9 / frequency.QuadPart;
+        printf("%d %20.2lf ns\n", s, time_taken);
+        free(Arr);
+    }
+
+    printf("\n\nBinary Search:\n");
+    printf("Input size \t time taken\n");
+    for (int i = 0; i < n; i++)
+    {
+        int s = Sizes[i];
+        int *Arr = GenArr(s);
+        int target = s - 1;
+        QueryPerformanceCounter(&start);
+        int index = BinarySearch(Arr, target, 0, s);
+        QueryPerformanceCounter(&end);
+        double time_taken = (double)(end.QuadPart - start.QuadPart) * 1e9 / frequency.QuadPart;
+        printf("%-7d %20.2lf ns\n", s, time_taken);
+        free(Arr);
+    }
+
+    printf("\n\nDirect Search (Hash Table):\n");
+    printf("Input size \t time taken\n");
+    for (int i = 0; i < n; i++)
+    {
+        int s = Sizes[i];
+        Block **hashTable = (Block **)malloc(sizeof(Block *) * s);
+        for (int j = 0; j < s; j++)
+        {
+            hashTable[j] = NULL;
+        }
+        int *Arr = GenArr(s);
+        int target = s - 1;
+        for (int j = 0; j < s; j++)
+        {
+            put(hashTable, Arr[j], s);
+        }
+        QueryPerformanceCounter(&start);
+        int index = search(hashTable, target, s);
+        QueryPerformanceCounter(&end);
+        double time_taken = (double)(end.QuadPart - start.QuadPart) * 1e9 / frequency.QuadPart;
+        printf("%-7d %20.2lf ns\n", s, time_taken);
+        free(Arr);
+        free(hashTable);
+    }
+    return 0;
 }

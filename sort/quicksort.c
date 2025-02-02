@@ -1,100 +1,75 @@
-// quickSort
 #include <stdio.h>
 
 void swap(int* arr, int i, int j);
-int pivot(int *arr, int pivotIndex, int endIndex);
+int pivot(int *arr, int left, int right);
 void quickSort(int *arr, int left, int right);
 void printArray(int arr[], int size);
 
 
 int main() {
-    // int arr[] = {4,6,1,7,3,2,5};
-    int arr[] = {1, 4, 7, 11, 15, 2, 5, 8, 12, 19, 3, 6, 9, 16, 22, 10, 13, 14, 17, 24, 18, 21, 23, 26, 30
-};
+    int arr[] = {4,3,7,2,1,9};
+    // int arr[] = {23, 7, 15, 42, 9, 11, 3, 27, 19, 34, 56, 12, 8, 6, 14, 25, 37, 2, 30, 17};
     int n = sizeof(arr) / sizeof(arr[0]);
 
     printf("Unsorted array : ");
-    // printArray(arr, n);
+    printArray(arr, n);
     
-    printf("%d\n", n);
-
     quickSort(arr, 0, n - 1);
-    // printf("%d\n", pivot(arr, 0, n));
 
-    printf("size: %d\n", n);
-
-
-    // printf("sorted array :   ");
+    printf("sorted array :   ");
     printArray(arr, n);
     return 0;
 }
 
 
-// void swap(int* arr, int i, int j) {
-//     int temp = arr[i];
-//     arr[i] = arr[j];
-//     arr[j] = temp;
-// }
-
-// int pivot(int *arr, int pivotIndex, int endIndex){
-//     int swapIndex = pivotIndex;
-//     for(int i = pivotIndex+1; i < endIndex; i++){
-//         int x = arr[i], y = arr[pivotIndex];
-//         if(arr[i] < arr[pivotIndex]){
-//             swapIndex++;
-//             swap(arr, i, swapIndex);
-//         }
-//     }
-
-//     swap(arr, pivotIndex, swapIndex);
-//     return swapIndex;
-// }
-
-// void quickSort(int *arr, int left, int right){
-//     if(left < right){
-//         int index = pivot(arr, left, right);
-//         quickSort(arr, left, index);
-//         quickSort(arr,index + 1, right);
-//     }
-// }
-
-void swap(int *arr, int i, int j){
+void swap(int* arr, int i, int j) {
     int temp = arr[i];
     arr[i] = arr[j];
     arr[j] = temp;
 }
 
-int partition(int *arr, int pivotIndex, int end){
-    int swapIndex = pivotIndex;
+int pivot(int *arr, int left, int right){
+    // int pivot = arr[left];
+    // int i = left + 1;
     
-    for(int i = pivotIndex + 1; i < end; i++){
+    // for (int j = left + 1; j <= right; j++) {
+    //     if (arr[j] < pivot) {
+    //         swap(arr, i, j);
+    //         i++;
+    //     }
+    // }
+    
+    // swap(arr, left, i - 1);
+    
+    // return i - 1;
+
+    int pivotIndex = left;
+    int swapIndex = pivotIndex;
+
+    for(int i = pivotIndex + 1; i<= right ; i++){
         if(arr[i] < arr[pivotIndex]){
             swapIndex++;
-            swap(arr, i, swapIndex);
+            swap(arr, swapIndex , i);
         }
     }
 
-    swap(arr, pivotIndex, swapIndex);
+    swap(arr, swapIndex, pivotIndex);
     return swapIndex;
-
 }
 
-void quickSort(int *arr, int start, int end){
-    if(start >= end){
-        return;
+void quickSort(int *arr, int left, int right){
+    if(left < right){
+        int index = pivot(arr, left, right);
+        printf("pivot = %d", index);
+        printf("\n");
+        quickSort(arr, left, index-1);
+        quickSort(arr,index+1, right);
     }
-
-    int pivot = partition(arr,start,end);
-    quickSort(arr, start, pivot);
-    quickSort(arr, pivot+1, end);
 }
-
 
 void printArray(int arr[], int size) {
     for (int i = 0; i < size; i++) {
         printf("%d ", arr[i]);
     }
     printf("\n");
-
 }
-

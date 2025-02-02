@@ -17,17 +17,18 @@ char* postFixGenerator(char *exp);
 
 
 
-// int main(){
-//     char exp[] = "7+5*3/5^1+(3-2)";
+int main(){
+    // char exp[] = "7+5*3/5^1+(3-2)";
+    char exp[] = "1-2+3*(4*5-6)/7+8*9";
 
-//     printf("Infix Expression:   %s\n", exp);
+    printf("Infix Expression:   %s\n", exp);
 
-//     char *res = postFixGenerator(exp);
+    char *res = postFixGenerator(exp);
 
-//     printf("Postfix Expression: %s", res);
+    printf("Postfix Expression: %s", res);
 
-//     return 0;
-// }
+    return 0;
+}
 
 
 

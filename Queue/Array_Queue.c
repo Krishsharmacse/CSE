@@ -1,49 +1,67 @@
 #include<stdio.h>
 
-#define size 20
+#define size 5
 
-int Q[size];
-int front, rear;
+int Queue[size];
+int F,R;
 
-void enqueue(int val);
-int Dequeue();
+void EnQ(int val);
+int DeQ();
+
 
 int main(){
-    front = rear = 0;
+    F = R = -1;
 
-    enqueue(5);
-    enqueue(7);
-    enqueue(4);
-    enqueue(2);
+    EnQ(5);
+    EnQ(7);
+    EnQ(4);
+    EnQ(2);
+    EnQ(2);
 
-    printf("%d\n", Dequeue());    
-    printf("%d\n", Dequeue());    
-    printf("%d\n", Dequeue());    
-    printf("%d\n", Dequeue());    
-    printf("%d\n", Dequeue());    
+    printf("%d\n", DeQ());    
+    printf("%d\n", DeQ());    
+    printf("%d\n", DeQ());    
+    printf("%d\n", DeQ());    
+    printf("%d\n", DeQ());    
+    printf("%d\n", DeQ());   
 
-
-    return 0; 
 }
 
 
-void enqueue(int val){
-    if((rear + 1) % size == front){
-        printf("queue is full");
+void EnQ(int val){
+    if((R+1)%size == F){
+        printf("Queue is full");
         return;
     }
 
-    Q[rear] = val;
-    rear = (rear + 1) % size;
+       
+    if(F==-1 && R == -1){
+        F = 0;
+    }
+
+    R = (R+1)%size;
+    Queue[R] = val;
 }
 
-int Dequeue(){
-    if(front == rear){
-        printf("queue is empty ");
+
+int DeQ(){
+    if(F == -1){
+        printf("empty");
         return -1;
     }
 
-    int val = Q[front];
-    front = (front + 1) % size;
+    int val = Queue[F];
+
+    if(F == R){   
+        F = R = -1;
+    }else{
+        F = (F+1) % size;
+    }
     return val;
 }
+
+
+
+
+
+
