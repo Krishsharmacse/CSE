@@ -7,12 +7,10 @@ void sort(int *matrix, int matrixSize){
         int j = i - 1;
         while(j > -1 && val < matrix[j]){
             matrix[j+1] = matrix[j];
-            matrix[j--] = val;
-        }
-        
+            j--;
+        }   
+        matrix[++j] = val;
     }
-
-    
 }
 
 int main(){
