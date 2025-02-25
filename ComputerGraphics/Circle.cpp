@@ -16,7 +16,7 @@ int main(){
     initgraph(&gd,&gm,(char*)"");
     printf("%d %d", getmaxx(), getmaxy());
 
-    Bresenham_circle(200,200,100);
+    Bresenham_circle(300,250,200);
     getch();
     closegraph();
 
@@ -44,27 +44,29 @@ void Brasenham_line(int x1,int y1,int x2,int y2){
 
 void PutPixels(int xc, int yc, int x, int y, int color) {
 
-    // putpixel(xc + x, yc + y , color);
-    // putpixel(xc + y, yc + x , color);
+    putpixel(xc + x, yc + y , color);
+    putpixel(xc + y, yc + x , color);
 
-    // putpixel(xc + x, yc - y , color);
-    // putpixel(xc - y, yc + x , color);
+    putpixel(xc + x, yc - y , color);
+    putpixel(xc - y, yc + x , color);
     
-    // putpixel(xc - x, yc + y , color);
-    // putpixel(xc + y, yc - x , color);
+    putpixel(xc - x, yc + y , color);
+    putpixel(xc + y, yc - x , color);
     
-    // putpixel(xc - x, yc - y , color);
-    // putpixel(xc - y, yc - x , color);
-    
-    for (int i = xc - x; i <= xc + x; i++) {
-        putpixel(i, yc + y, color);
-        putpixel(i, yc - y, color);
-    }
+    putpixel(xc - x, yc - y , color);
+    putpixel(xc - y, yc - x , color);
 
-    for (int i = xc - y; i <= xc + y; i++) {
-        putpixel(i, yc + x, color);
-        putpixel(i, yc - x, color);
-    }
+
+    // filled circle
+    // for (int i = xc - x; i <= xc + x; i++) {
+    //     putpixel(i, yc - y, RGB(1, 92, 146)); //upper 
+    //     putpixel(i, yc + y, RGB(188, 230, 255));
+    // }
+
+    // for (int i = xc - y; i <= xc + y; i++) {
+    //     putpixel(i, yc + x, RGB(136, 205, 246));
+    //     putpixel(i, yc - x, RGB(45, 130, 181));
+    // }
 }
 
 
@@ -75,8 +77,21 @@ void Bresenham_circle(int xc, int yc, int r) {
 
 
     
-    while (x <= y) {
-        PutPixels(xc, yc, x , y, RED);  // Plot all symmetric points
+    while (x<=y){
+        PutPixels(xc, yc, x , y, RED); 
+        //thick circle 
+        PutPixels(xc, yc, x, y-1, RED); 
+        PutPixels(xc, yc, x, y-2, RED); 
+        
+        //dotted circle
+        // if(x % 15 < 4) PutPixels(xc, yc, x , y, RED);
+        
+        // //dotted thick circle
+        // if(x % 15 < 4){
+        //     PutPixels(xc, yc, x , y, RED);  
+        //     PutPixels(xc, yc, x, y-1, RED); 
+        //     PutPixels(xc, yc, x, y-2, RED); 
+        // }
         x++;
 
         if (d <= 0) {
@@ -86,6 +101,5 @@ void Bresenham_circle(int xc, int yc, int r) {
             d = d + 4 * (x - y) + 10;
         }
 
-        PutPixels(xc, yc, x , y, RED);  // Plot again after updating x, y
     }   
 }
