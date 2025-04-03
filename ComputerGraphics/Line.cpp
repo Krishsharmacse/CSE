@@ -9,7 +9,10 @@
 #include <iostream>
 
 
+void PlotPoint(int x,int y,int color);
 void DDAline(int x1,int x2,int y1,int y2);
+void Brasenham_Vertical_line(int x1,int y1,int x2,int y2);
+void Brasenham_Horizontal_line(int x1,int y1,int x2,int y2);
 void Brasenham_line(int x1,int y1,int x2,int y2);
 
 
@@ -20,23 +23,34 @@ void Brasenham_line(int x1,int y1,int x2,int y2);
 int main(){
     int gd = DETECT, gm;
     initgraph(&gd,&gm,(char*)"");
-    printf("%d %d", getmaxx(), getmaxy());
 
-    // DDAline(-200,0,200,0);
-    Brasenham_line(100,200,500,50);
-    // while (!kbhit()) {
-    //     if (GetAsyncKeyState(VK_LBUTTON)){  // Check if the left button is clicked
-    //         int x =  mousex(), y =  mousey();
-    //         putpixel(x,y,BLUE);
-    //         putpixel(x+1,y,BLUE);
-    //         putpixel(x-1,y,BLUE);
-    //         putpixel(x,y+1,BLUE);
-    //         putpixel(x,y-1,BLUE);
+    // int x= 100, y = -50;
+
+    // DDAline(0,0, x, y);
+    // Brasenham_line(0,0,x,y);
+
+
+    PlotPoint(0, 0, 2);
+    // PlotPoint(x, y, 3);
+    
+    
+
+    while (!kbhit()) {
+        if (GetAsyncKeyState(VK_LBUTTON)){  // Check if the left button is clicked
+            int x =  mousex(), y =  mousey();
+
+
+            printf("%d, %d\n", x,y);
+            Brasenham_line(getmaxx()/2, getmaxy()/2, x, y);
+            // putpixel(x,y,BLUE);
+            // putpixel(x+1,y,BLUE);
+            // putpixel(x-1,y,BLUE);
+            // putpixel(x,y+1,BLUE);
+            // putpixel(x,y-1,BLUE);
             
-    //         putpixel(x+1,y+2,BLUE);
-    //         delay(5);            
-    //     }
-    // }
+            delay(5);            
+        }
+    }
     getch();
     closegraph();
 
@@ -44,70 +58,116 @@ int main(){
 }
 
 
+void PlotPoint(int x,int y,int color){
+    int maxX = getmaxx();
+    int maxY = getmaxy(); 
+    putpixel((maxX/2 + x)    , (maxY/2 - y)    , color);
+    putpixel((maxX/2 + x) + 1, (maxY/2 - y)    , color);
+    putpixel((maxX/2 + x)    , (maxY/2 - y) + 1, color);
+    putpixel((maxX/2 + x) - 1, (maxY/2 - y)    , color);
+    putpixel((maxX/2 + x) - 1, (maxY/2 - y) + 1, color);
+}
+
+
 void DDAline(int x1,int y1,int x2,int y2){
 
-    x1 += getmaxx()/2;
+    x1 = getmaxx()/2 + x1;
     y1 = getmaxy()/2 - y1;
-    x2 += getmaxx()/2;
+
+    x2 = getmaxx()/2 + x2;
     y2 = getmaxy()/2 - y2;
+
+    printf("(x = %d, y = %d) \n(x = %d, y = %d)\n\n", x1, y1, x2, y2);
 
     int dx = x2-x1, dy = y2-y1;
     int step = (abs(dx) > abs(dy)) ? abs(dx) : abs(dy);
 
+    printf("step = %d\n", step);
     
-    float xinc = (float)dx / step;
-    float yinc = (float)dy / step;
-
+    float xinc = (step != 0) ? (float)dx / step : 0;
+    float yinc = (step != 0) ? (float)dy / step : 1;
+    
+    printf("xinc = %f, yinc = %f", xinc, yinc);
+    
     for(int i = 0; i < step; i++){
-        if (i % 10 < 5) { // Creates a dashed effect
+        // if (i % 10 < 5) { // Creates a dashed effect
             putpixel(round(x1), round(y1), RED);
-        }
+        // }
         x1 += xinc;
         y1 += yinc;
     }
     
 }
 
+void swap(int *x, int *y){
+    int temp = *x;
+    *x = *y;
+    *y = temp;
+}
+
+
+
 
 
 void Brasenham_line(int x1,int y1,int x2,int y2){
-    int dx = x2-x1, dy = y2-y1;
-    int p = 2*dy - dx;
+    // x1 = getmaxx()/2 + x1;
+    // y1 = getmaxy()/2 - y1;
 
+    // x2 = getmaxx()/2 + x2;
+    // y2 = getmaxy()/2 - y2;
     
-    while(x1 < x2){
-        putpixel(x1,y1,RED);
-        x1++;
-        if(p <= 0) p = p +2*dy;
-        else {
-            y1++;
-            p = p + 2*dy -2*dx;
-        }
+    if(abs(x2 - x1) < abs(y2 - y1)){// for vertical lines
+        Brasenham_Vertical_line(x1,y1,x2,y2);
+    }else{
+        Brasenham_Horizontal_line(x1,y1,x2,y2);
     }
+    
 }
 
 
 
-void Brasenham_line_h(int x1,int y1,int x2,int y2){
+
+
+void Brasenham_Vertical_line(int x1,int y1,int x2,int y2){
+    if(y1 > y2){ // for dx < 0
+        swap(&x1, &x2);
+        swap(&y1, &y2);
+    }
 
     int dx = x2-x1, dy = y2-y1;
-    int dir = dy < 0 ? -1 : 1;
+    int dir = (dx > 0) ? 1 : -1; // for m < 0
+    dx *= dir;
+    
+    int p = 2*dx - dy;
+    while(y1 <= y2){
+        putpixel(x1,y1,RED);
+        y1++;
+        if(p <= 0) p = p + 2*dx;
+        else {
+            x1 += dir;
+            p = p + 2*dx -2*dy;
+        }
+    }
+}
+
+void Brasenham_Horizontal_line(int x1,int y1,int x2,int y2){
+    if(x1 > x2){ // for dx < 0
+        swap(&x1, &x2);
+        swap(&y1, &y2);
+    }
+
+    int dx = x2-x1, dy = y2-y1;
+    int dir = (dy > 0) ? 1 : -1; // for m < 0
     dy *= dir;
-
-    int p = 2*dy - dx;
-
     
-    while(x1 < x2){
+    int p = 2*dy - dx;
+    while(x1 <= x2){
         putpixel(x1,y1,RED);
         x1++;
         if(p <= 0) p = p +2*dy;
         else {
-            y1+=dir;
+            y1 += dir;
             p = p + 2*dy -2*dx;
         }
     }
-}
-
-void Brasenham_line_v(int x1,int y1,int x2,int y2){
-
 }

@@ -41,7 +41,7 @@ void drawEllipse(int xc, int yc, int a, int b){
     // **Region 1:**
     float P = b2 - (a2 * b) + (0.25 * a2);  // Initial decision parameter
 
-    while ((2 * b2 * x) <= (2 * a2 * y)) {  // Until slope = -1
+    while ((b2 * x) <= ( a2 * y)) {  // Until slope = -1
         PutPixelEllipse(xc, yc, x, y, 2);
         
         if (P <= 0) {

@@ -10,7 +10,7 @@ int MatrixChainOrder_recursive(int *matrices, int i, int j, int **s);
 int MatrixChainOrder_DP(int *matrices, int i, int j, int **dp, int **s);
 int MatrixChainOrder_iterative(int *matrices, int size, int **s);
 void printOptimalParens(int **s, int i, int j);
-
+void printArray(int **arr, int m, int n);
 
 
 int main(){
@@ -21,7 +21,8 @@ int main(){
 
 
     //20 matrices
-    int Matrices[21] = {12, 20, 35, 55, 65, 70, 68, 75, 40, 38, 42, 50, 18, 24, 30, 28, 48, 56, 60, 80, 82};
+    // int Matrices[21] = {12, 20, 35, 55, 65, 70, 68, 75, 40, 38, 42, 50, 18, 24, 30, 28, 48, 56, 60, 80, 82};
+    int Matrices[] = {20,30,10,100,50};
     int n = sizeof(Matrices) / sizeof(Matrices[0]);
 
     int **dp = (int **)calloc(n, sizeof(int *));
@@ -30,6 +31,7 @@ int main(){
         s[i] = (int *)calloc(n, sizeof(int));
         dp[i] = (int *)calloc(n, sizeof(int));
         for(int j = 0; j<n; j++) dp[i][j] = -1;
+        dp[i][i] = 0;
     }
 
 
@@ -73,10 +75,25 @@ int main(){
     printOptimalParens(s, 1, n-1);
     printf("\ntime taken: %20.2lf ns\n\n", time_taken);
 
+
+    printArray(dp, n, n);
+    printArray(s, n, n);
+
     return 0;
 }
 
 
+void printArray(int **arr, int m, int n){
+    for(int i = 1; i< m; i++){
+        for(int j = 1; j< n; j++){
+            printf("%10d ", arr[i][j]);
+        }
+
+        printf("\n");
+    }
+
+    printf("\n\n");
+}
 
 
 
@@ -145,7 +162,7 @@ int MatrixChainOrder_iterative(int *matrices, int size, int **s){
     
     // chain length L2 = A x B, L3 = A x B x C, etc
     for(int L = 2; L<size; L++){ // minimum chain length can be 2: multiplication of 2 matrix
-
+        
         // starting point for combinations
         for(int i = 1; i < size-L+1; i++){
             int j = i+L-1;  // end index
