@@ -41,8 +41,6 @@ class Transformation{
         }
 
         void updateCoordinates(int **Matrix, int vertices){
-            printf("update Coordinates\n");
-            PrintMatrix(Matrix);
             V = vertices;
             for(int i=0; i<V; i++){
                 for(int j = 0; j<3;j++){
@@ -162,6 +160,21 @@ class Transformation{
 
         }
 
+        void DrawAxis(int c = 15){
+            setcolor(c);
+            settextstyle(DEFAULT_FONT, HORIZ_DIR, 2);
+            line(getmaxx()/2, 0, getmaxx()/2, getmaxy());
+            line(0, getmaxy()/2, getmaxx(), getmaxy()/2);
+
+            outtextxy(getmaxx()/2 + 5, 2, (char*)"y");
+            outtextxy(getmaxx()/2 + 5, getmaxy()-20, (char*)"-y");
+
+            outtextxy(getmaxx()-20, getmaxy()/2 - 20, (char*)"x");
+            outtextxy(2, getmaxy()/2-20, (char*)"-x");
+
+            outtextxy(getmaxx()/2+5, getmaxy()/2-20, (char*)"(0,0)");
+        }
+
 
 
         template<typename T>
@@ -220,7 +233,7 @@ class Transformation{
             }
         }
 
-        private:
+    private:
         template<typename T>
         void PrintMatrix(T **Arr){
             for(int i = 0; i < V; i++) {
@@ -256,6 +269,7 @@ int main(){
     // obj.Scale(2,3);
     // obj.SetColor(12);
     // obj.Rotate(M_PI/3);
+
 
     
     int **res;
