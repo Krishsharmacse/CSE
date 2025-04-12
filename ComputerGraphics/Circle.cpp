@@ -29,15 +29,14 @@ void Brasenham_line(int x1,int y1,int x2,int y2){
     int p = 2*dy - dx;
 
     
-    putpixel(x1,y1,RED);
     while(x1 < x2){
+        putpixel(x1,y1,RED);
         x1++;
         if(p <= 0) p = p +2*dy;
         else {
             y1++;
             p = p + 2*dy -2*dx;
         }
-        putpixel(x1,y1,RED);
     }
 }
 
@@ -92,14 +91,13 @@ void Bresenham_circle(int xc, int yc, int r) {
         //     PutPixels(xc, yc, x, y-1, RED); 
         //     PutPixels(xc, yc, x, y-2, RED); 
         // }
-        x++;
-
+        
         if (d <= 0) {
             d = d + 4 * x + 6;
         } else {
-            y--;  // Fix: Decrease y instead of increasing
+            y--;
             d = d + 4 * (x - y) + 10;
         }
-
+        x++;
     }   
 }
