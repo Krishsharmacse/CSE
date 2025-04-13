@@ -104,7 +104,7 @@ class Transformation{
 
         } 
 
-        int ** ReflectX(){
+        int **ReflectX(){
             int **Matrix = (int**)malloc(3* sizeof(int*));
             for(int i=0; i<3; i++){
                 Matrix[i] = (int*)calloc(3, sizeof(int));
@@ -117,7 +117,7 @@ class Transformation{
             return M;
 
         }
-        int ** ReflectY(){
+        int **ReflectY(){
             int **Matrix = (int**)malloc(3* sizeof(int*));
             for(int i=0; i<3; i++){
                 Matrix[i] = (int*)calloc(3, sizeof(int));
