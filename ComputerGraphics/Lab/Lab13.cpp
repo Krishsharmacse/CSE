@@ -4,18 +4,18 @@
 
 using namespace std;
 
-struct Point3D {
+struct Point {
     float x, y, z;
 };
 
-void projectPoint(Point3D p, int &x2d, int &y2d, float d) {
+void projectPoint(Point p, int &x2d, int &y2d, float d) {
     float x_proj = (p.x * d) / (p.z);
     float y_proj = (p.y * d) / (p.z);
-    x2d = getmaxx()/2 + int(x_proj); 
-    y2d = getmaxy()/2 - int(y_proj);
+    x2d = getmaxx()/2 + (int)(x_proj); 
+    y2d = getmaxy()/2 - (int)(y_proj);
 }
 
-void drawEdge(Point3D p1, Point3D p2, float d) {
+void drawEdge(Point p1, Point p2, float d) {
     int x1, y1, x2, y2;
     projectPoint(p1, x1, y1, d);
     projectPoint(p2, x2, y2, d);
@@ -36,7 +36,7 @@ int main() {
     setlinestyle(SOLID_LINE, 0, 1);
     
     float d = 100.0f; 
-    Point3D cube[8] = {
+    Point cube[8] = {
         {-100, -100, 100}, {100, -100, 100}, {100, 100, 100},  {-100, 100, 100},
         {-100, -100, 200}, {100, -100, 200}, {100, 100, 200}, {-100, 100, 200}
     };

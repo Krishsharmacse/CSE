@@ -13,8 +13,6 @@ typedef struct{
     Edge* edges;
 }Graph;
 
-
-
 typedef struct Node{
     int parent;
     int rank;
@@ -31,41 +29,22 @@ void KruskalMST(Graph* graph);
 
 
 int main() {
-    int V = 6; 
-    int E = 8; 
+    int V = 4;
+    int E = 5;
     Graph* graph = createGraph(V, E);
 
-    graph->edges[0].src = 0;
-    graph->edges[0].dest = 1;
-    graph->edges[0].weight = 5;
+    //src, dest, weight
+    Edge edges[] = {
+        {0, 1, 10},  
+        {0, 2, 6},   
+        {0, 3, 5},   
+        {1, 3, 15},  
+        {2, 3, 4}    
+    };
 
-    graph->edges[1].src = 0;
-    graph->edges[1].dest = 3;
-    graph->edges[1].weight = 11;
-
-    graph->edges[2].src = 1;
-    graph->edges[2].dest = 4;
-    graph->edges[2].weight = 3;
-
-    graph->edges[3].src = 1;
-    graph->edges[3].dest = 2;
-    graph->edges[3].weight = 7;
-
-    graph->edges[4].src = 2;
-    graph->edges[4].dest = 4;
-    graph->edges[4].weight = 1;
-
-    graph->edges[5].src = 2;
-    graph->edges[5].dest = 5;
-    graph->edges[5].weight = -3;
-    
-    graph->edges[6].src = 3;
-    graph->edges[6].dest = 4;
-    graph->edges[6].weight = 0;
-    
-    graph->edges[7].src = 5;
-    graph->edges[7].dest = 4;
-    graph->edges[7].weight = 2;
+    for (int i = 0; i < E; i++) {
+        graph->edges[i] = edges[i];
+    }
 
     KruskalMST(graph);
 
@@ -74,6 +53,7 @@ int main() {
 
     return 0;
 }
+
 
 
 //----------------------------------------------------------------------------------------

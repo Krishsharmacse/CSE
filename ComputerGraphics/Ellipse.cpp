@@ -16,6 +16,7 @@ int main(){
     int xc = getmaxx()/2, yc = getmaxy()/2;
 
     drawEllipse(xc, yc, 100, 60);
+    
     getch();
     closegraph();
 

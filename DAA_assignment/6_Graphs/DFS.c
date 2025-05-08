@@ -40,8 +40,6 @@ void printGraph(Graph* graph) {
 }
 
 
-
-
 int t = 0;
 void DFS(Graph *graph, int startingVertex, int Stime[], int Ftime[]){
     int v = startingVertex;

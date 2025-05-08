@@ -19,13 +19,16 @@ int main(){
     int gdriver = DETECT, gmode;
     initgraph(&gdriver, &gmode, (char*)"");
 
-    setcolor(WHITE);
+    setbkcolor(WHITE);
+    cleardevice();
+
+    setcolor(BLACK);
     rectangle(x_min, y_min, x_max, y_max);
 
     int x1 = 450, y1 = 350; 
     int x2 = 50, y2 = 50;      
     
-    setcolor(YELLOW);
+    setcolor(COLOR(255, 150, 150));
     line(x1,y1,x2,y2);
 
     clip(x1, y1, x2,y2);
@@ -53,7 +56,6 @@ void clip(int x1, int y1, int x2,int y2){
 
     
     while(true){
-        printf("%d %d %d\n", code1, code2, code1&code2);
         if(code1==0 && code2==0){
             printf("trivially accepted\n");
             accept = true;
@@ -69,11 +71,9 @@ void clip(int x1, int y1, int x2,int y2){
         else out = code1;
 
         float m;
-        if (x2 != x1) {
-            m = (float)(y2 - y1) / (x2 - x1);
-        } else {
-            m = 999999;  
-        }
+        if (x2 != x1) m = (float)(y2 - y1) / (x2 - x1);
+        else m = 999999;  
+        
         
         int newX, newY;
         if(out & top){
